@@ -1,5 +1,6 @@
 ---
 title: "Banque de la Republique d'Haiti"
+author : "by: Brutus Doree / Bernadin Ritza"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
