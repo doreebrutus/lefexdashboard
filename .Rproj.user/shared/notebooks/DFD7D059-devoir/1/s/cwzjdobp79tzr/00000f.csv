@@ -1,0 +1,1 @@
+"0","ggplot(data=Tauxdujour, aes( y= Column1, fill= Column1, color= Column1)) + geom_bar(stat=""count"")+labs(x= ""Secteur"", y= ""Categorie (Column)"")"

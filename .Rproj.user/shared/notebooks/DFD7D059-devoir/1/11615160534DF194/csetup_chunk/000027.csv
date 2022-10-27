@@ -1,0 +1,11 @@
+"0","library(flexdashboard)"
+"0","library(tidyverse)"
+"0","library(ggplot2)"
+"0","library(shiny)"
+"0","library(readxl)"
+"0","library(DT)"
+"0","Tauxdujour<-read_excel(""C:\\Users\\The Best\\OneDrive\\Documents\\taux du jour 1.xlsx"",sheet=""data1"")"
+"0","Tauxparbanque<-read_excel(""C:\\Users\\The Best\\OneDrive\\Documents\\Taux par les banques.xlsx"",sheet=""data2"")"
+"0","Taux1<-read_excel(""‪C:\Users\The Best\OneDrive\Documents\tdj.xlsx"",sheet=""a"")"
+"2","Error: bidi formatting not allowed (line 1), use escapes instead (\u202a)
+"

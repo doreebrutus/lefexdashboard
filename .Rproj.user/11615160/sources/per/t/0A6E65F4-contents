@@ -1,0 +1,136 @@
+---
+title: "Banque de la Republique d'Haiti"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(ggplot2)
+library(shiny)
+library(readxl)
+library(DT)
+library(dplyr)
+Tauxdujour<-read_excel("C:\\Users\\The Best\\OneDrive\\Documents\\taux du jour 1.xlsx",sheet="data1")
+Tauxparbanque<-read_excel("C:\\Users\\The Best\\OneDrive\\Documents\\Taux par les banques.xlsx",sheet="data2")
+informel<-slice(Tauxdujour, c(1,6))
+
+```
+
+
+
+# Taux par banque
+row {data-width=180}
+-------------------------------------------------------------------
+### valuebox
+```{r}
+valueBox(27, color="yellow", icon="fa-pencil")
+```
+
+
+### A
+```{r}
+gauge(27, min = 0, max = 100, gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+```
+### B
+
+```{r}
+gauge(60, min = 0, max = 100, gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+```
+### C
+```{r}
+gauge(9, min = 0, max = 100, gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+```
+
+
+
+column {data-width=500 .tabset}
+-------------------------------------------------------------------
+
+
+
+### Graphique pour la categorie Achat
+```{r}
+ggplot(Tauxparbanque, aes(x=ACHATS ,y= Secteurs, fill= Secteurs, color = "part_cadres"))+ geom_point(stat="identity", shape=15, size=5)+labs(
+  x="Categorie de Banque", y="Achat")
+```
+
+### Graphique-Categorie Vente
+```{r}
+ggplot(data = Tauxparbanque, aes(x= VENTES, y=Secteurs, group = "genus", color="yellow")) +geom_line()
+```
+
+### Graphique-Categorie Spreapds
+```{r}
+ggplot(Tauxparbanque, aes(x=SPREAD, y=Secteurs, fill=Secteurs))+geom_bin2d(stat="identity", position="dodge")+labs(x="SPREAD", y="SECTEURS")
+```
+
+### Tableau
+
+```{r}
+datatable(Tauxparbanque,
+          extensions="Buttons",
+          options = list(
+            dom ="Bfrtip",
+            buttons = c("copy", "print","excel")
+          ))
+```
+
+# Taux par marche informel/Taux de reference
+
+row{data-width=180}
+-------------------------------------------------------------------
+### valuebox
+```{r}
+valueBox(28, color="red", icon="far-pencil")
+```
+
+
+### AA
+```{r}
+gauge(80, min = 0, max = 100, gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+```
+
+
+row {.tabset}
+-----------------------------------------------------------------------
+
+
+### Graphique->Achats
+
+```{r}
+ggplot(informel, aes(x=ACHATS, y=Categorie, fill=ACHATS, ))+geom_bar(stat="identity")
+
+```
+
+### Graphique->Ventes
+```{r}
+ggplot(informel, aes(x=Categorie, y=VENTES, fill=VENTES, ))+geom_bar(stat="identity")
+```
+
+### Graphique->Spread
+```{r}
+ggplot(informel, aes(x=Categorie, y=SPREAD, fill=SPREAD,colors ))+geom_bar(stat="identity")
+```
+
+### Tableau
+
+```{r}
+datatable(informel,
+          extensions="Buttons",
+          options = list(
+            dom ="Bfrtip",
+            buttons = c("copy", "print","excel")
+          ))
+```
